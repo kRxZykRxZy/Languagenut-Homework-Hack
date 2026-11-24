@@ -160,7 +160,8 @@ class TaskCompleter {
             isExam: this.mode === "exam",
             correctStudentAns: "",
             incorrectStudentAns: "",
-            timeStamp: Math.floor(speed + ((Math.random() - 0.5) / 10) * speed) * 1000,
+            // Random time between 5 and 15 seconds per question, summed for the total task
+            timeStamp: Math.floor(vocabs.reduce((sum, _) => sum + (5 + Math.random() * 10), 0)) * 1000,
             vocabNumber: vocabs.length,
             rel_module_uid: this.task.rel_module_uid,
             dontStoreStats: true,
@@ -225,7 +226,7 @@ class TaskCompleter {
 
     async callLnut(url, data) {
         const urlData = new URLSearchParams(data).toString();
-        const response = await fetch(`https://api.languagenut.com/${url}?${urlData}`);
+        const response = await fetch(`https://localhost:3000/${url}?${urlData}`);
         return await response.json();
     }
 
@@ -266,7 +267,7 @@ class ClientApplication {
 
     async callLnut(url, data) {
         const urlData = new URLSearchParams(data).toString();
-        const response = await fetch(`https://api.languagenut.com/${url}?${urlData}`);
+        const response = await fetch(`https://localhost:3000/${url}?${urlData}`);
         return await response.json();
     }
 
